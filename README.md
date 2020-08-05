@@ -295,7 +295,7 @@ After a successful run, the file `bed_load_mpm.xlsx` opens, the `Compute` button
 -------------- -----------------------------------------
 **HOMEWORK:**  Tweak the validity check of user inputs.
                 Deactivate the `self.b_run` button with
-                `self.b_run["state"] = "disabled"` and re-activate the button if the user inputs are correct (result of `valid_selections`). 
+                `self.b_run["state"] = "disabled"` and re-activate the button (`self.b_run["state"] = "normal"`) if the user inputs are correct (result of `valid_selections`). 
                 For this purpose, the call to `valid_selections` must be moved outside the `run_program` method.
                 
 -----------------------------------------------------------
