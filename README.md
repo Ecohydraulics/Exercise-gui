@@ -1,4 +1,6 @@
-### Python Programming in Water Resources Engineering and Research
+### Python Programming for Water Resources Engineering and Research
+
+![gui](https://hydro-informatics.github.io/images/hello-gui.png)
 
 ***
 
@@ -6,7 +8,15 @@
 
 >	***Background***: A GUI simplifies the definition of input variables of custom code and makes code easy to use for less experienced (*Python*) users. This exercise creates a GUI for the [sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport).
 
->   ***Goals***: This exercise features the creation of a  Graphical User Interface based on the [course instructions](https://hydro-informatics.github.io/hypy_gui.html).
+>   ***Goals***: This exercise features the creation of a Graphical User Interface based on the [course instructions](https://hydro-informatics.github.io/hypy_gui.html).
+
+>   ***Requirements***: *Python* libraries: *tkinter*, *numpy*, and *pandas*. Read and understand the [creation of GUIs](https://hydro-informatics.github.io/hypy_gui.html). Accomplish the [sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport).
+
+Get ready by cloning the exercise repository:
+
+```
+git clone https://github.com/Ecohydraulics/Exercise-gui.git
+```
 
 
 Before getting started with the exercise, make sure to copy the code from the [sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport) into the `sediment_transport` sub-folder of the GUI exercise repository (i.e., overwrite *bedload.py*, *fun.py*, *grains.py*, *hec.py*, *.py*, *main.py*, and *mpm.py* with your code). If the file names are different from the default names used in the sediment transport exercise, adapt the `__init__.py` file in the `sediment_transport` sub-folder. Thus, we created a module called `sediment_transport`, where the `main.py` file requires some modifications.
@@ -17,7 +27,7 @@ Before getting started with the exercise, make sure to copy the code from the [s
     - `hec_file` to enable the selection of a user-defined workbook for *HEC-RAS* output.
     - `out_folder` to enable the definition of a user-defined output directory for the bed load results workbook.
 
-* Modify the calls in the `main(...)` function:
+* Modify the calls in the `main` function:
 
 ```python
 @log_actions
