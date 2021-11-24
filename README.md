@@ -1,6 +1,6 @@
 ### Python Programming for Water Resources Engineering and Research
 
-![gui](https://hydro-informatics.com/img/hello-gui.png)
+![gui](https://hydro-informatics.com/_images/hello-gui.png)
 
 ***
 
