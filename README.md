@@ -6,11 +6,11 @@
 
 ## Exercise: Create a **G**raphical **U**ser **I**nterface (GUI)
 
->	***Background***: A GUI simplifies the definition of input variables of custom code and makes code easy to use for less experienced (*Python*) users. This exercise creates a GUI for the [sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport).
+>	***Background***: A GUI simplifies the definition of input variables of custom code and makes code easy to use for less experienced (Python) users. This exercise creates a GUI for the [sediment transport exercise](https://hydro-informatics.com/exercises/ex-sediment.html).
 
->   ***Goals***: This exercise features the creation of a Graphical User Interface based on the [course instructions](https://hydro-informatics.github.io/hypy_gui.html).
+>   ***Goals***: This exercise features the creation of a Graphical User Interface based on the [course instructions](https://hydro-informatics.com/jupyter/gui.html).
 
->   ***Requirements***: *Python* libraries: *tkinter*, *numpy*, and *pandas*. Read and understand the [creation of GUIs](https://hydro-informatics.github.io/hypy_gui.html). Accomplish the [sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport).
+>   ***Requirements***: *Python* libraries: *tkinter*, *numpy*, and *pandas*. Read and understand the [creation of a GUI with tkinter](https://hydro-informatics.com/jupyter/gui.html). Accomplish the [sediment transport exercise](https://hydro-informatics.com/exercises/ex-sediment.html).
 
 Get ready by cloning the exercise repository:
 
@@ -19,7 +19,7 @@ git clone https://github.com/Ecohydraulics/Exercise-gui.git
 ```
 
 
-Before getting started with the exercise, make sure to copy the code from the [sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport) into the `sediment_transport` sub-folder of the GUI exercise repository (i.e., overwrite *bedload.py*, *fun.py*, *grains.py*, *hec.py*, *.py*, *main.py*, and *mpm.py* with your code). If the file names are different from the default names used in the sediment transport exercise, adapt the `__init__.py` file in the `sediment_transport` sub-folder. Thus, we created a module called `sediment_transport`, where the `main.py` file requires some modifications.
+Before getting started with the exercise, make sure to copy the code from the [sediment transport exercise repository](https://github.com/Ecohydraulics/Exercise-SedimentTransport) into the `sediment_transport` sub-folder of the GUI exercise repository (i.e., overwrite *bedload.py*, *fun.py*, *grains.py*, *hec.py*, *.py*, *main.py*, and *mpm.py* with your code). If the file names are different from the default names used in the sediment transport exercise, adapt the `__init__.py` file in the `sediment_transport` sub-folder. Thus, we created a module called `sediment_transport`, where the `main.py` file requires some modifications.
 
 * Remove the `get_char_grain_size` function (will be replaced in the GUI).
 * Add three optional arguments to the `main()` function:
@@ -42,7 +42,7 @@ def main(D_char, hec_file, out_folder):
 
 ## Make the application frame
 
-Create a new *Python* file, call it `gui.py` and import the following libraries:
+Create a new Python file, call it `gui.py` and import the following libraries:
 
 ```python
 import os
@@ -76,7 +76,7 @@ The initialization of the `tk.Frame` parent class is the first and most importan
         self.master.iconbitmap("graphs/icon.ico")
 ```
 
->   ***Note***: Make sure to get the icon path right. Otherwise the app may crash.
+>   **Deal with error message `TclError: bitmap "graphs/icon.ico" not defined`**: If you get this error message or similar, make sure the icon path is correct. In addition, recall that some recent versions versions of `tkinter` cannot open icons because of an unknown error that might stem from relative path definitions in the library. Therefore, if you are sure the path is correct and the error message `TclError: bitmap "graphs/icon.ico" not defined` persists, the only solution might be to comment out the line `self.master.iconbitmap("graphs/icon.ico")`.
 
 Assign a window geometry with window width and height, as well as *x* and *y* position on the screen in pixel units:
 
@@ -109,7 +109,7 @@ We will create three buttons to let the user select:
 1. A *HEC-RAS* output workbook (`xlsx`) file, and
 1. An output directory where the resulting `bed_load_mpm.xlsx` workbook will be stored.
 
-Every button triggers a method of `SediApp`, which we will define later on. The methods to trigger are defined with the `command=self.METHOD()` keyword ([recall the instructions for creating a `tk.Button`](https://hydro-informatics.github.io/hypy_gui.html#add-a-button-to-call-a-function)).
+Every button triggers a method of `SediApp`, which we will define later on. The methods to trigger are defined with the `command=self.METHOD()` keyword ([recall the instructions for creating a `tk.Button`](https://hydro-informatics.com/jupyter/gui.html#add-a-button-to-call-a-function)).
 
 The file and folder directories need to be initialized before we can use them in the button texts. Therefore, add to `__init__`:
 
@@ -182,7 +182,7 @@ Add a `ttk.Combobox` that lists grain sizes and lets the user choose which value
 
 The above-defined buttons call methods to open file names and directories (as *string*). As file selection dialogues are required twice (grains and *HEC-RAS* data), it makes sense to have a general function for selecting files. Therefore, add a new method to `SediApp` and call it `select_file`. The method uses  `askopenfilename` from `tkinter.filedialog` and takes two input arguments. The first argument (`description`) should be a (very) short description of the file to select. The second argument (`file_type`) represents the file type (ending) that the user should look for. Both arguments are bound as a *tuple* into a *list* of `filetypes` that `askopenfilename` uses to narrow down and clarify file selection options.
 
->   ***Note***: The `select_file` function could also be extended to multiple file types (e.g., include multiple types of workbooks or text files with `filetypes=[("Workbook", "xlsx; xlsx; ods"), ("Text file", "*.csv; *.txt")]`).
+>   **Note**: The `select_file` function could also be extended to multiple file types (e.g., include multiple types of workbooks or text files with `filetypes=[("Workbook", "xlsx; xlsx; ods"), ("Text file", "*.csv; *.txt")]`).
 
 The `initialdir` keyword argument defines the directory that opens up in the file dialogue window. The `title` keyword argument sets the dialog window's title and `parent` defines the parent window or `tk.Frame` (important when working with multiple `tk.Frame` objects such as [`ttk.Notebook`](https://docs.python.org/3.1/library/tkinter.ttk.html#tkinter.ttk.Notebook) tabs).
 
@@ -194,7 +194,7 @@ The `initialdir` keyword argument defines the directory that opens up in the fil
                                parent=self)
 ```
 
-To enable the selection of a grain `csv` file, write a `set_grain_file` method as used with the above `tk.Button`. The `set_grain_file` method opens a file selection dialog and tries to open the file as a `GrainReader` object ([recall sediment transport exercise](https://github.com/Ecohydraulics/Exercise-SedimentTransport#read-grain-size-data)). If it cannot open the selected grain size `csv` file, the method falls into an `OSError` statement and opens a `showinfo` box (from `tkinter.messagebox`) that notifies the user about the error. Otherwise (if everything is OK), the method updates the grain label (`self.grain_label`) and the combobox (`self.cbx_D_char`) with the information read from the grain size `csv` file.
+To enable the selection of a grain `csv` file, write a `set_grain_file` method as used with the above `tk.Button`. The `set_grain_file` method opens a file selection dialog and tries to open the file as a `GrainReader` object ([recall sediment transport exercise](https://hydro-informatics.com/exercises/ex-sediment.html#read-grain-size-data)). If it cannot open the selected grain size `csv` file, the method falls into an `OSError` statement and opens a `showinfo` box (from `tkinter.messagebox`) that notifies the user about the error. Otherwise (if everything is OK), the method updates the grain label (`self.grain_label`) and the combobox (`self.cbx_D_char`) with the information read from the grain size `csv` file.
 
 ```python
     def set_grain_file(self):
@@ -235,7 +235,7 @@ The selection of an output directory uses `askdirectory`, which is another metho
 
 ***
 
-***Are all user inputs correctly defined?***
+**Are all user inputs correctly defined?**
 
 Before running the bed load computation, we need to make sure that a grain size file, *HEC-RAS* workbook, and output directory are defined because the user can press the `self.b_run` button at any time. To ensure that the necessary inputs are provided, parse `self.grain_file`, `self.hec_file`, and `self.out_folder` for the *string* `"SELECT"`, which is the default value of these variables (i.e., if the user did not make a choice, the variables contain the *string* `"SELECT"`). Implement the validity check in a method called `valid_selections`:
  
@@ -281,7 +281,7 @@ After the successful run of the program, the `run_program` method sets the foreg
 ```
 
 ## Make the script stand-alone
-To create the window, make `gui.py` stand-alone executable by adding the following statement to the file bottom ([recall the stand-alone descriptions](https://hydro-informatics.github.io/hypy_pckg.html#standalone)):
+To create the window, make `gui.py` stand-alone executable by adding the following statement to the file bottom ([recall the stand-alone descriptions](https://hydro-informatics.com/jupyter/pypckg.html#make-script-stand-alone)):
 
 ```python
 if __name__ == '__main__':
@@ -290,15 +290,15 @@ if __name__ == '__main__':
 
 
 ## Launch the GUI
-Using [*PyCharm*](https://hydro-informatics.github.io/hy_ide.html#pycharm), right-click in the `gui.py` script and click `> Run 'gui'`. If the script crashes or raises error messages, trace them back, and fix the issues. Otherwise, a `tkinter` window opens:
+Using [PyCharm](https://hydro-informatics.com/get-started/ide.html#pycharm-with-anaconda), right-click in the `gui.py` script and click `> Run 'gui'`. If the script crashes or raises error messages, trace them back, and fix the issues. Otherwise, a `tkinter` window opens:
 
-![guistart](https://github.com/Ecohydraulics/Exercise-gui/raw/master/graphs/gui-start.png)
+![guistart](https://github.com/Ecohydraulics/Exercise-gui/raw/main/graphs/gui-start.png)
 
-Use the buttons to select a grain `csv` file (e.g., [`grains.csv`](https://github.com/Ecohydraulics/Exercise-SedimentTransport/raw/master/grains.csv) from the sediment transport exercise), a *HEC-RAS* output `xlsx` workbook (e.g., [`HEC-RAS/output.xlsx`](https://github.com/Ecohydraulics/Exercise-SedimentTransport/raw/master/HEC-RAS/output.xlsx) from the sediment transport exercise), and define an output directory (e.g., `.../Exercise-gui/`). Make sure to select a characteristic grain size in the combobox (e.g., `D84`) and click on the `Compute` button.
+Use the buttons to select a grain `csv` file (e.g., [grains.csv](https://github.com/Ecohydraulics/Exercise-SedimentTransport/raw/main/grains.csv) from the sediment transport exercise), a *HEC-RAS* output `xlsx` workbook (e.g., [HEC-RAS/output.xlsx](https://github.com/Ecohydraulics/Exercise-SedimentTransport/raw/main/HEC-RAS/output.xlsx) from the sediment transport exercise), and define an output directory (e.g., *.../Exercise-gui/*). Make sure to select a characteristic grain size in the combobox (e.g., `D84`) and click on the `Compute` button.
 
 After a successful run, the file `bed_load_mpm.xlsx` opens, the `Compute` button turns green, and the label below the button confirms the successful run (otherwise traceback errors and fix them). The GUI should now look like this:
 
-![guiend](https://github.com/Ecohydraulics/Exercise-gui/raw/master/graphs/gui-end.png)
+![guiend](https://github.com/Ecohydraulics/Exercise-gui/raw/main/graphs/gui-end.png)
 
 
 -------------- -----------------------------------------
